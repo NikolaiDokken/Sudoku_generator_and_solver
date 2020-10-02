@@ -1,4 +1,5 @@
 import random
+import pygame
 
 class Sudoku:
     # generates random sudoku
@@ -72,6 +73,14 @@ class Sudoku:
 
                 self.arr[row][col] = 0
         return False
+
+    # This method is only used to display sudoku in GUI
+    def draw_sudoku(self, screen, square_size, font):
+        for row in range(9):
+            for col in range(9):
+                label = font.render(str(self.arr[row][col]), 1, (0,0,0))
+                screen.blit(label, (row*square_size + square_size*0.3, col*square_size))
+
 
 if __name__ == "__main__":
     test_sudoku = Sudoku()
