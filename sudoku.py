@@ -76,8 +76,9 @@ class Sudoku:
     def draw_sudoku(self, screen, square_size, font):
         for row in range(9):
             for col in range(9):
-                label = font.render(str(self.arr[row][col]), 1, (0, 0, 0))
-                screen.blit(label, (col * square_size + square_size * 0.3, row * square_size))
+                if self.arr[row][col] != 0:
+                    label = font.render(str(self.arr[row][col]), 1, (0, 0, 0))
+                    screen.blit(label, (col * square_size + square_size * 0.3, row * square_size))
 
 
 if __name__ == "__main__":
