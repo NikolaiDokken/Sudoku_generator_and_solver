@@ -1,6 +1,5 @@
 import pygame
 from sudoku import Sudoku
-from math import pi
 
 # Initialize the game engine
 pygame.init()
@@ -14,7 +13,7 @@ RED = (255, 0, 0)
 
 # Set the width and height of the screen
 size = [600, 700]
-screen = pygame.display.set_mode([size[0]+2, size[1]])
+screen = pygame.display.set_mode([size[0] + 2, size[1]])
 
 square_side = size[0] / 9
 
@@ -25,20 +24,10 @@ done = False
 clock = pygame.time.Clock()
 
 # Generates a sudoku
-sudoku = Sudoku([
-        [0,0,4,0,0,0,3,0,0],
-        [2,0,0,7,0,9,0,0,8],
-        [0,6,0,5,0,4,0,7,0],
-        [0,0,5,0,7,0,2,0,0],
-        [4,0,0,3,0,5,0,0,9],
-        [0,0,7,0,9,0,5,0,0],
-        [0,4,0,9,0,2,0,5,0],
-        [8,0,0,6,0,7,0,0,2],
-        [0,0,9,0,0,0,1,0,0]
-    ])
+sudoku = Sudoku()
 
 # Font to be used for text
-myfont = pygame.font.SysFont("Comic Sans MS", 48)
+my_font = pygame.font.SysFont("Comic Sans MS", 48)
 
 while not done:
 
@@ -59,16 +48,16 @@ while not done:
     screen.fill(WHITE)
 
     for i in range(10):
-        if (i%3==0):
-            pygame.draw.line(screen, BLACK, [0, i*square_side], [size[0], i*square_side], 5)
-            pygame.draw.line(screen, BLACK, [i*square_side, 0], [i*square_side, size[0]], 5)
+        if i % 3 == 0:
+            pygame.draw.line(screen, BLACK, [0, i * square_side], [size[0], i * square_side], 5)
+            pygame.draw.line(screen, BLACK, [i * square_side, 0], [i * square_side, size[0]], 5)
         else:
-            pygame.draw.line(screen, BLACK, [0, i*square_side], [size[0], i*square_side], 1)
+            pygame.draw.line(screen, BLACK, [0, i * square_side], [size[0], i * square_side], 1)
             pygame.draw.line(screen, BLACK, [i * square_side, 0], [i * square_side, size[0]], 1)
 
-    sudoku.draw_sudoku(screen, square_side, myfont)
-    label = myfont.render("Press spacebar to solve", 1, (0, 0, 0))
-    screen.blit(label, (10, square_side*9))
+    sudoku.draw_sudoku(screen, square_side, my_font)
+    label = my_font.render("Press space to solve", 1, (0, 0, 0))
+    screen.blit(label, (10, square_side * 9))
 
     # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
