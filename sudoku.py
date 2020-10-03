@@ -16,21 +16,19 @@ class Sudoku:
 
     def valid_slot(self, row, col, num):
         # check row
-        if (num in self.arr[row]):
+        if num in self.arr[row]:
                 return False
 
         # check column
         for y in range(9):
-            if (self.arr[row][y] == num):
+            if (self.arr[y][col] == num):
                 return False
 
         # check box
-        rowsection = row // 3
-        colsection = col // 3
         for x in range(3):
             for y in range(3):
                 # check if section is valid
-                if (self.arr[rowsection * 3 + x][colsection * 3 + y] == num):
+                if (self.arr[x+row-row%3][y + col-col%3] == num):
                     return False
         return True
 
@@ -79,11 +77,21 @@ class Sudoku:
         for row in range(9):
             for col in range(9):
                 label = font.render(str(self.arr[row][col]), 1, (0,0,0))
-                screen.blit(label, (row*square_size + square_size*0.3, col*square_size))
+                screen.blit(label, (col*square_size + square_size*0.3, row*square_size))
 
 
 if __name__ == "__main__":
-    test_sudoku = Sudoku()
+    test_sudoku = Sudoku([
+        [0,0,4,0,0,0,3,0,0],
+        [2,0,0,7,0,9,0,0,8],
+        [0,6,0,5,0,4,0,7,0],
+        [0,0,5,0,7,0,2,0,0],
+        [4,0,0,3,0,5,0,0,9],
+        [0,0,7,0,9,0,5,0,0],
+        [0,4,0,9,0,2,0,5,0],
+        [8,0,0,6,0,7,0,0,2],
+        [0,0,9,0,0,0,1,0,0]
+    ])
     print("Generated sudoku")
     test_sudoku.print_sudoku()
     print()
